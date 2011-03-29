@@ -285,6 +285,21 @@ class BitcoinConnection(object):
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
         
+    def listaccounts(self, minconf=1):
+        """
+        Returns a list of account names.
+        
+        Arguments:
+        
+        - *minconf* -- Minimum number of confirmations before payments are included.
+        """
+        try:
+            #return [AccountInfo(**x) for x in self.proxy.listaccounts(minconf)]
+            return [x for x in self.proxy.listaccounts(minconf)]
+        except JSONRPCException,e:
+            raise _wrap_exception(e.error)
+
+    
     def listreceivedbyaccount(self, minconf=1, includeempty=False):
         """
         Returns a list of accounts.
