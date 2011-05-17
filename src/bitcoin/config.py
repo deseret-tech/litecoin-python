@@ -30,10 +30,13 @@ def read_config_file(filename):
     try:
         cfg = {}
         for line in f:
-	    line = line.rstrip()
-	    if line:
-	        (key, value) = line.split('=', 1)
-	        cfg[key] = value
+            line = line.strip()
+            if line and not line.startswith("#"):
+                try:
+                    (key, value) = line.split('=', 1)
+                    cfg[key] = value
+                except ValueError:
+                    pass # Happens when line has no '=', ignore
     finally:
         f.close()
     return cfg
