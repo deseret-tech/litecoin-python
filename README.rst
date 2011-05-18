@@ -21,4 +21,5 @@ TODO
 ======
 These things still have to be added:
 
-- SSL support (including certificate verification)
+- SSL support (including certificate verification) for managing remote bitcoin daemons.
+
