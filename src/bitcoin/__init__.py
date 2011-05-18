@@ -31,7 +31,9 @@ def connect_to_local():
 
     cfg = read_default_config()
     port = int(cfg.get('rpcport', '8332'))
-    return BitcoinConnection(cfg['rpcuser'],cfg['rpcpassword'],'localhost',port)
+    rcpuser = cfg.get('rpcuser', '')
+
+    return BitcoinConnection(rcpuser,cfg['rpcpassword'],'localhost',port)
     
 def connect_to_remote(user, password, host='localhost', port=8332):
     """
