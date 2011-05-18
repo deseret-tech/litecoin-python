@@ -17,3 +17,8 @@ bitcoin-python uses setuptools for the install script. There are no dependencies
   $ python setup.py build
   $ python setup.py install
 
+TODO
+======
+These things still have to be added:
+
+- SSL support (including certificate verification)
