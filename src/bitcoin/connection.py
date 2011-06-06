@@ -281,7 +281,7 @@ class BitcoinConnection(object):
 
         """
         try:
-            return [AddressInfo(*x) for x in self.proxy.listreceivedbyaddress(minconf, includeempty)]
+            return [AddressInfo(**x) for x in self.proxy.listreceivedbyaddress(minconf, includeempty)]
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
         
