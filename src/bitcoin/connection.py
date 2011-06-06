@@ -366,19 +366,22 @@ class BitcoinConnection(object):
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
         
-    def getbalance(self, account=None):
+    def getbalance(self, account=None, minconf=None):
         """
         Get the current balance, either for an account or the total server balance.
         
         Arguments:
         - *account* -- If this parameter is specified, returns the balance in the account.
+        - *minconf* -- Minimum number of confirmations required for transferred balance.
 
         """
+        args = []
+        if account:
+            args.append(account)
+            if minconf is not None:
+                args.append(minconf)
         try:
-            if account is None:
-                return self.proxy.getbalance()
-            else:
-                return self.proxy.getbalance(account)
+            return self.proxy.getbalance(*args)
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
         
