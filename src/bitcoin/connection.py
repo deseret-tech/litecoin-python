@@ -281,7 +281,7 @@ class BitcoinConnection(object):
 
         """
         try:
-            return [AddressInfo(*x) for x in self.proxy.listreceivedbyaddress(minconf, includeempty)]
+            return [AddressInfo(**x) for x in self.proxy.listreceivedbyaddress(minconf, includeempty)]
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
         
@@ -317,7 +317,7 @@ class BitcoinConnection(object):
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
 
-    def listtransactions(self, account, count=10):
+    def listtransactions(self, account, count=10, address=None):
         """
         Returns a list of the last transactions for an account.
         
@@ -327,11 +327,13 @@ class BitcoinConnection(object):
         
         - *minconf* -- Minimum number of confirmations before payments are included.
         - *count* -- Number of transactions to return.
+        - *address* -- Receive address to consider
 
         """
         try:
             return [TransactionInfo(**x) for x in 
-                 self.proxy.listtransactions(account, count)]
+                 self.proxy.listtransactions(account, count)
+                 if address is None or x["address"] == address]
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
 
@@ -364,19 +366,22 @@ class BitcoinConnection(object):
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
         
-    def getbalance(self, account=None):
+    def getbalance(self, account=None, minconf=None):
         """
         Get the current balance, either for an account or the total server balance.
         
         Arguments:
         - *account* -- If this parameter is specified, returns the balance in the account.
+        - *minconf* -- Minimum number of confirmations required for transferred balance.
 
         """
+        args = []
+        if account:
+            args.append(account)
+            if minconf is not None:
+                args.append(minconf)
         try:
-            if account is None:
-                return self.proxy.getbalance()
-            else:
-                return self.proxy.getbalance(account)
+            return self.proxy.getbalance(*args)
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
         
