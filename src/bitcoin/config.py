@@ -45,13 +45,18 @@ def read_default_config():
     """
     Read bitcoin default configuration from the current user's home directory.
     """
-    import os
+    import os, platform
     home = os.getenv("HOME")
     if not home:
         raise IOError("Home directory not defined, don't know where to look for config file")
-     
+    
+    if platform.system() == "Darwin":
+        location = 'Library/Application Support/Bitcoin/bitcoin.conf'
+    else:
+        location = '.bitcoin/bitcoin.conf'
+    
     try:
-        return read_config_file(os.path.join(home, '.bitcoin/bitcoin.conf'))
+        return read_config_file(os.path.join(home, location))
     except (IOError,ValueError):
         pass # Cannot read config file, ignore
 
