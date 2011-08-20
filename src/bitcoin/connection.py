@@ -267,6 +267,22 @@ class BitcoinConnection(object):
             return self.proxy.getreceivedbyaccount(account, minconf)
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
+            
+            
+    def gettransaction(self, txid):
+        """
+        Get detailed information about transaction
+
+        Arguments:
+
+        - *txid* -- Transactiond id for which the info should be returned
+
+        """
+        try:
+            return TransactionInfo(**self.proxy.gettransaction(txid))
+        except JSONRPCException,e:
+            raise _wrap_exception(e.error)
+    
 
     def listreceivedbyaddress(self, minconf=1, includeempty=False):
         """
