@@ -1,25 +1,6 @@
-bitcoin-python is a set of Python libraries that allows easy access to the
-bitcoin peer-to-peer cryptocurrency client API.
+New maintainer!
+======================
 
-Documentation
-===========================
+This repository is no longer maintained!
 
-Documentation can be found here, or in the source archive. It is built
-using Sphinx:
-
-http://toomanysecrets0.github.com/bitcoin-python/doc/
-
-Installation instructions
-===========================
-
-bitcoin-python uses setuptools for the install script. There are no dependencies apart from Python itself.
-
-  $ python setup.py build
-  $ python setup.py install
-
-TODO
-======
-These things still have to be added:
-
-- SSL support (including certificate verification) for managing remote bitcoin daemons.
-
+Use https://github.com/laanwj/bitcoin-python from now on.
