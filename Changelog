@@ -8,3 +8,5 @@
   client not a bitcoin client implementation.
 
 * Add COPYING (MIT license)
+
+* Add "gettransaction" command (thanks chopachom)
