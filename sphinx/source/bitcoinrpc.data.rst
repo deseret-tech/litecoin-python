@@ -1,7 +1,7 @@
-:mod:`bitcoin.exceptions` --- Exception definitions
+:mod:`bitcoinrpc.data` --- Bitcoin RPC service, data objects
 ====================================================================================
 
-.. automodule:: bitcoin.exceptions
+.. automodule:: bitcoinrpc.data
    :members:
    :show-inheritance:
-      
+   

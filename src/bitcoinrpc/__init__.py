@@ -24,10 +24,10 @@ def connect_to_local():
     """
     Connect to default bitcoin instance owned by this user, on this machine.
     
-    Returns a :class:`~bitcoin.connection.BitcoinConnection` object.
+    Returns a :class:`~bitcoinrpc.connection.BitcoinConnection` object.
     """
-    from bitcoin.connection import BitcoinConnection
-    from bitcoin.config import read_default_config    
+    from bitcoinrpc.connection import BitcoinConnection
+    from bitcoinrpc.config import read_default_config    
 
     cfg = read_default_config()
     port = int(cfg.get('rpcport', '8332'))
@@ -39,9 +39,9 @@ def connect_to_remote(user, password, host='localhost', port=8332):
     """
     Connect to remote or alternative local bitcoin client instance.
 
-    Returns a :class:`~bitcoin.connection.BitcoinConnection` object.
+    Returns a :class:`~bitcoinrpc.connection.BitcoinConnection` object.
     """
-    from bitcoin.connection import BitcoinConnection
+    from bitcoinrpc.connection import BitcoinConnection
 
     return BitcoinConnection(user, password, host, port)
 

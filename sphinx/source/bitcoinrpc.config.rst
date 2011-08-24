@@ -1,8 +1,7 @@
-:mod:`bitcoin.connection` --- Connect to Bitcoin server via JSON-RPC
+:mod:`bitcoinrpc.config` --- Utilities for reading bitcoin configuration files
 ====================================================================================
 
-.. automodule:: bitcoin.connection
+.. automodule:: bitcoinrpc.config
    :members:
    :show-inheritance:
-
-
+   

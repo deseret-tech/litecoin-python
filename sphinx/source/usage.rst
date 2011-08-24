@@ -32,22 +32,22 @@ Connecting to the wallet from Python
 There are two functions for this:
 
 *Connecting to local bitcoin instance*
-  Use the function :func:`~bitcoin.connect_to_local`. This automagically
+  Use the function :func:`~bitcoinrpc.connect_to_local`. This automagically
   sorts out the connection to a bitcoin process running on the current machine,
   for the current user.
   
   ::
   
-    conn = bitcoin.connect_to_local()
+    conn = bitcoinrpc.connect_to_local()
 
 *Connecting to a remote bitcoin instance*
-  Use the function :func:`~bitcoin.connect_to_remote`. For this function
+  Use the function :func:`~bitcoinrpc.connect_to_remote`. For this function
   it is neccesary to explicitly specify a hostname and port to connect to, and
   to provide user credentials for logging in.
 
   ::
   
-    conn = bitcoin.connect_to_remote('foo', 'bar', host='payments.yoyodyne.com', port=8332)
+    conn = bitcoinrpc.connect_to_remote('foo', 'bar', host='payments.yoyodyne.com', port=8332)
 
 
 How to use the API
@@ -56,14 +56,14 @@ How to use the API
 For basic sending and receiving of payments, the four most important methods are 
 
 *Getting the current balance*
-  Use the method :func:`~bitcoin.connection.BitcoinConnection.getbalance` to get the current server balance.
+  Use the method :func:`~bitcoinrpc.connection.BitcoinConnection.getbalance` to get the current server balance.
   
   ::
   
     print "Your balance is %f" % (conn.getbalance(),)
 
 *Check a customer address for validity and get information about it*
-  This can be done with the method :func:`~bitcoin.connection.BitcoinConnection.validateaddress`.
+  This can be done with the method :func:`~bitcoinrpc.connection.BitcoinConnection.validateaddress`.
 
   ::
 
@@ -74,7 +74,7 @@ For basic sending and receiving of payments, the four most important methods are
           print "The address that you provided is invalid, please correct"
 
 *Sending payments*
-  The method :func:`~bitcoin.connection.BitcoinConnection.sendtoaddress` sends a specified
+  The method :func:`~bitcoinrpc.connection.BitcoinConnection.sendtoaddress` sends a specified
   amount of coins to a specified address.
 
   ::
@@ -82,7 +82,7 @@ For basic sending and receiving of payments, the four most important methods are
       conn.sendtoaddress("msTGAm1ApjEJfsWfAaRVaZHRm26mv5GL73", 20.0)
 
 *Get a new address for accepting payments*
-  To accept payments, use the method :func:`~bitcoin.connection.BitcoinConnection.getnewaddress`
+  To accept payments, use the method :func:`~bitcoinrpc.connection.BitcoinConnection.getnewaddress`
   to generate a new address. Give this address to the customer and store it in a safe place, to be able to check
   when the payment to this address has been made.
 
@@ -92,7 +92,7 @@ For basic sending and receiving of payments, the four most important methods are
       print "We will ship the pirate sandwidth after payment of 200 coins to ", pay_to
 
 *Check how much has been received at a certain address*
-  The method :func:`~bitcoin.connection.BitcoinConnection.getreceivedbyaddress` 
+  The method :func:`~bitcoinrpc.connection.BitcoinConnection.getreceivedbyaddress` 
   returns how many bitcoins have been received at a certain address. Together with the
   previous function, this can be used to check whether a payment has been made
   by the customer.

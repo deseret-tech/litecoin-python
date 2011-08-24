@@ -20,9 +20,9 @@
 """
 Connect to Bitcoin server via JSON-RPC.
 """
-from bitcoin.proxy import JSONRPCException, ServiceProxy
-from bitcoin.exceptions import _wrap_exception
-from bitcoin.data import ServerInfo,AccountInfo,AddressInfo,TransactionInfo,AddressValidation,WorkItem
+from bitcoinrpc.proxy import JSONRPCException, ServiceProxy
+from bitcoinrpc.exceptions import _wrap_exception
+from bitcoinrpc.data import ServerInfo,AccountInfo,AddressInfo,TransactionInfo,AddressValidation,WorkItem
 
 class BitcoinConnection(object):
     """
@@ -133,7 +133,7 @@ class BitcoinConnection(object):
 
     def getinfo(self):
         """
-        Returns an :class:`~bitcoin.data.ServerInfo` object containing various state info.
+        Returns an :class:`~bitcoinrpc.data.ServerInfo` object containing various state info.
         """
         try:
             return ServerInfo(**self.proxy.getinfo())
@@ -272,7 +272,7 @@ class BitcoinConnection(object):
         """
         Returns a list of addresses.
         
-        Each address is represented with a :class:`~bitcoin.data.AddressInfo` object.
+        Each address is represented with a :class:`~bitcoinrpc.data.AddressInfo` object.
 
         Arguments:
         
@@ -304,7 +304,7 @@ class BitcoinConnection(object):
         """
         Returns a list of accounts.
         
-        Each account is represented with a :class:`~bitcoin.data.AccountInfo` object.
+        Each account is represented with a :class:`~bitcoinrpc.data.AccountInfo` object.
         
         Arguments:
         
@@ -321,7 +321,7 @@ class BitcoinConnection(object):
         """
         Returns a list of the last transactions for an account.
         
-        Each transaction is represented with a :class:`~bitcoin.data.TransactionInfo` object.
+        Each transaction is represented with a :class:`~bitcoinrpc.data.TransactionInfo` object.
         
         Arguments:
         
@@ -354,7 +354,7 @@ class BitcoinConnection(object):
         """
         Validate a bitcoin address and return information for it.
 
-        The information is represented by a :class:`~bitcoin.data.AddressValidation` object.
+        The information is represented by a :class:`~bitcoinrpc.data.AddressValidation` object.
         
         Arguments:
         
@@ -438,7 +438,7 @@ class BitcoinConnection(object):
         Get work for remote mining, or submit result. 
         If data is specified, the server tries to solve the block 
         using the provided data and returns :const:`True` if it was successful.
-        If not, the function returns formatted hash data (:class:`~bitcoin.data.WorkItem`) 
+        If not, the function returns formatted hash data (:class:`~bitcoinrpc.data.WorkItem`) 
         to work on.
         
         Arguments:

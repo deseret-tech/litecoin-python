@@ -1,7 +1,7 @@
-:mod:`bitcoin` --- Convenience functions
+:mod:`bitcoinrpc` --- Convenience functions
 ====================================================================================
 
-.. automodule:: bitcoin
+.. automodule:: bitcoinrpc
    :members:
    :show-inheritance:
       

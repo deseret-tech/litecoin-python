@@ -28,7 +28,7 @@ requires manually checking the contents of :const:`JSONException` objects.
 ``bitcoin-python`` attempts to create an even more friendly interface by wrapping the JSON-RPC API. The major advantages
 compared to a raw ``jsonrpc`` based approach are:
 
-- Better exception handling. Exceptions are converted to subclasses of :class:`~bitcoin.exceptions.BitcoinException`.
+- Better exception handling. Exceptions are converted to subclasses of :class:`~bitcoinrpc.exceptions.BitcoinException`.
 
 - Automatic bitcoin configuration loading. In case the ``bitcoin -server`` or ``bitcoind`` program runs on the same 
   machine as the client script, and as the same user, the configuration file can automatically be parsed. This
@@ -37,9 +37,9 @@ compared to a raw ``jsonrpc`` based approach are:
 - Documentation in Pythonish format. You are reading this right now.
 
 - The functions 
-  :func:`~bitcoin.connection.BitcoinConnection.getinfo`, :func:`~bitcoin.connection.BitcoinConnection.listreceivedbyaccount`,
-  :func:`~bitcoin.connection.BitcoinConnection.listreceivedbyaddress`, 
-  :func:`~bitcoin.connection.BitcoinConnection.listtransactions` and more return actual Python objects, instead of simply
+  :func:`~bitcoinrpc.connection.BitcoinConnection.getinfo`, :func:`~bitcoinrpc.connection.BitcoinConnection.listreceivedbyaccount`,
+  :func:`~bitcoinrpc.connection.BitcoinConnection.listreceivedbyaddress`, 
+  :func:`~bitcoinrpc.connection.BitcoinConnection.listtransactions` and more return actual Python objects, instead of simply
   dictionaries. This makes for cleaner code, as the fields can simply be addressed with ``x.foo`` instead of 
   ``x['foo']``.
 

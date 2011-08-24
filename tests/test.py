@@ -6,11 +6,11 @@ Only on the test network.
 import sys
 sys.path.append('../src')
 
-import bitcoin
-from bitcoin.exceptions import BitcoinException,InsufficientFunds
+import bitcoinrpc
+from bitcoinrpc.exceptions import BitcoinException,InsufficientFunds
 
 if __name__ == "__main__":
-    conn = bitcoin.connect_to_local()
+    conn = bitcoinrpc.connect_to_local()
 
     assert(type(conn.getblockcount()) is int)
     assert(type(conn.getblocknumber()) is int)

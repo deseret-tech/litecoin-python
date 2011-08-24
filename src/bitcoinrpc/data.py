@@ -20,11 +20,11 @@
 """
 Bitcoin RPC service, data objects.
 """
-from bitcoin.util import DStruct
+from bitcoinrpc.util import DStruct
 
 class ServerInfo(DStruct):
     """
-    Information object returned by :func:`~bitcoin.connection.BitcoinConnection.getinfo`.
+    Information object returned by :func:`~bitcoinrpc.connection.BitcoinConnection.getinfo`.
     
     - *errors* -- Number of errors.
     
@@ -56,7 +56,7 @@ class ServerInfo(DStruct):
 
 class AccountInfo(DStruct):
     """
-    Information object returned by :func:`~bitcoin.connection.BitcoinConnection.listreceivedbyaccount`.
+    Information object returned by :func:`~bitcoinrpc.connection.BitcoinConnection.listreceivedbyaccount`.
     
     - *account* -- The account of the receiving address.
     
@@ -68,7 +68,7 @@ class AccountInfo(DStruct):
 
 class AddressInfo(DStruct):
     """
-    Information object returned by :func:`~bitcoin.connection.BitcoinConnection.listreceivedbyaddress`.
+    Information object returned by :func:`~bitcoinrpc.connection.BitcoinConnection.listreceivedbyaddress`.
     
     - *address* -- Receiving address.
     
@@ -82,7 +82,7 @@ class AddressInfo(DStruct):
 
 class TransactionInfo(DStruct):
     """
-    Information object returned by :func:`~bitcoin.connection.BitcoinConnection.listtransactions`.
+    Information object returned by :func:`~bitcoinrpc.connection.BitcoinConnection.listtransactions`.
     
     - *category* -- will be generate, send, receive, or move.
     
@@ -103,7 +103,7 @@ class TransactionInfo(DStruct):
 
 class AddressValidation(DStruct):
     """
-    Information object returned by :func:`~bitcoin.connection.BitcoinConnection.validateaddress`.
+    Information object returned by :func:`~bitcoinrpc.connection.BitcoinConnection.validateaddress`.
     
     - *isvalid* -- Validatity of address (:const:`True` or :const:`False`).
 
@@ -115,7 +115,7 @@ class AddressValidation(DStruct):
 
 class WorkItem(DStruct):
     """
-    Information object returned by :func:`~bitcoin.connection.BitcoinConnection.getwork`.
+    Information object returned by :func:`~bitcoinrpc.connection.BitcoinConnection.getwork`.
     
     - *midstate* -- Precomputed hash state after hashing the first half of the data.
 

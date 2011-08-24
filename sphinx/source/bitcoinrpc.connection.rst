@@ -1,7 +1,8 @@
-:mod:`bitcoin.util` --- Generic utilities used by bitcoin client library
+:mod:`bitcoinrpc.connection` --- Connect to Bitcoin server via JSON-RPC
 ====================================================================================
 
-.. automodule:: bitcoin.util
+.. automodule:: bitcoinrpc.connection
    :members:
    :show-inheritance:
-   
+
+

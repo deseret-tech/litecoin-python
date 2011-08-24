@@ -5,9 +5,9 @@
 .. toctree::
    :maxdepth: 2
 
-   bitcoin.rst
-   bitcoin.connection.rst
-   bitcoin.exceptions.rst
-   bitcoin.data.rst
-   bitcoin.config.rst
+   bitcoinrpc.rst
+   bitcoinrpc.connection.rst
+   bitcoinrpc.exceptions.rst
+   bitcoinrpc.data.rst
+   bitcoinrpc.config.rst
 

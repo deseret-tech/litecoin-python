@@ -1,0 +1,9 @@
+2011-08-24  Wladimir van der Laan <laanwj@gmail.com>
+
+* Add metadata for PyPi packaging
+
+* Add Changelog
+
+* Rename package to 'bitcoinrpc' instead of 'bitcoin', makes more sense as this is a RPC
+  client not a bitcoin client implementation.
+
