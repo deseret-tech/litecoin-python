@@ -3,4 +3,4 @@ New maintainer!
 
 This repository is no longer maintained!
 
-Use https://github.com/laanwj/bitcoin-python from now on.
+Use https://github.com/laanwj/bitcoin-python from now on. Report issues there as well.
