@@ -40,10 +40,15 @@ if __name__ == "__main__":
     assert(x.isvalid == True)
     x = conn.validateaddress("invalid")
     assert(x.isvalid == False)
+    
+    tx = conn.listtransactions()
+    txid = tx[0].txid
+    txdata = conn.gettransaction(txid)
+    assert(txdata.txid == tx[0].txid)
 
     info = conn.getinfo()
     print "Blocks: %i" % info.blocks
     print "Connections: %i" % info.connections
     print "Difficulty: %f" % info.difficulty
 
-
+    

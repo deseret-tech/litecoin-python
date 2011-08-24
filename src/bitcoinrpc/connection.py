@@ -333,7 +333,7 @@ class BitcoinConnection(object):
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
 
-    def listtransactions(self, account, count=10, address=None):
+    def listtransactions(self, account='', count=10, address=None):
         """
         Returns a list of the last transactions for an account.
         
