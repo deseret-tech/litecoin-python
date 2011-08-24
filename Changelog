@@ -7,3 +7,4 @@
 * Rename package to 'bitcoinrpc' instead of 'bitcoin', makes more sense as this is a RPC
   client not a bitcoin client implementation.
 
+* Add COPYING (MIT license)

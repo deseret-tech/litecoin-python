@@ -3,7 +3,7 @@ setup(
     name = 'bitcoin-python',
     version = '0.2',
     description='Friendly Bitcoin JSON-RPC API binding for Python',
-    long_description='This package allows performing commands such as listing the current balance and sending coins to the Satoshi (original) client from Python.',
+    long_description='This package allows performing commands such as listing the current balance and sending coins to the Satoshi (original) client from Python. The communication with the client happens over JSON-RPC.',
     maintainer='Wladimir van der Laan',
     maintainer_email='laanwj@gmail.com',
     url='http://laanwj.github.com/bitcoin-python/doc/',
