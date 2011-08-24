@@ -7,7 +7,7 @@ Documentation
 Documentation can be found here, or in the source archive. It is built
 using Sphinx:
 
-http://toomanysecrets0.github.com/bitcoin-python/doc/
+http://laanwj.github.com/bitcoin-python/doc/
 
 Installation instructions
 ===========================
