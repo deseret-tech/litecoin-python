@@ -19,6 +19,15 @@ bitcoin-python uses setuptools for the install script. There are no dependencies
   $ python setup.py build
   $ python setup.py install
 
+Pypi / Cheeseshop
+==================
+
+It is possible to install the package through Pypi (cheeseshop), see http://pypi.python.org/pypi?:action=display&name=bitcoin-python
+
+::
+
+  $ pip install bitcoin-python
+
 TODO
 ======
 These things still have to be added:
