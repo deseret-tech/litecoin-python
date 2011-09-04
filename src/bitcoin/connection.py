@@ -433,6 +433,30 @@ class BitcoinConnection(object):
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
 
+    def sendmany(self, fromaccount, todict, minconf=1, comment=None):
+        """
+        Sends specified amounts from account's balance to bitcoinaddresses. This method will fail 
+        if there is less than total amount bitcoins with minconf confirmations in the account's 
+        balance (unless account is the empty-string-named default account; Returns transaction ID
+        on success.
+        
+        Arguments:
+        
+        - *fromaccount* -- Account to send from.
+        - *todict* -- Dictionary with Bitcoin addresses as keys and amounts as values.
+        - *minconf* -- Minimum number of confirmations required for transferred balance.
+        - *comment* -- Comment for transaction.
+
+        """
+        try:
+            if comment is None:
+                return self.proxy.sendmany(fromaccount, todict, minconf)
+            else:
+                return self.proxy.sendmany(fromaccount, todict, minconf, comment)
+        except JSONRPCException,e:
+            raise _wrap_exception(e.error)
+
+
     def getwork(self, data=None):
         """
         Get work for remote mining, or submit result. 
