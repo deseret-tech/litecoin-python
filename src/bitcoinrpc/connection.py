@@ -20,7 +20,7 @@
 """
 Connect to Bitcoin server via JSON-RPC.
 """
-from bitcoinrpc.proxy import JSONRPCException, ServiceProxy
+from bitcoinrpc.proxy import JSONRPCException, AuthServiceProxy
 from bitcoinrpc.exceptions import _wrap_exception
 from bitcoinrpc.data import ServerInfo,AccountInfo,AddressInfo,TransactionInfo,AddressValidation,WorkItem
 
@@ -46,7 +46,7 @@ class BitcoinConnection(object):
             user, password, host, port
             )
         try:
-            self.proxy = ServiceProxy(url)
+            self.proxy = AuthServiceProxy(url)
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
 
