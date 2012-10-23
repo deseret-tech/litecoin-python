@@ -500,6 +500,23 @@ class BitcoinConnection(object):
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
 
+    def verifymessage(self, bitcoinaddress, signature, message):
+        """
+        Verifies a signature given the bitcoinaddress used to sign,
+        the signature itself, and the message that was signed.
+        Returns :const:`True` if the signature is valid, and :const:`False` if it is invalid.
+
+        Arguments:
+
+        - *bitcoinaddress* -- the bitcoinaddress used to sign the message
+        - *signature* -- the signature to be verified
+        - *message* -- the message that was originally signed
+
+        """
+        try:
+            return self.proxy.verifymessage(bitcoinaddress,signature,message)
+        except JSONRPCException,e:
+            raise _wrap_exception(e.error)
 
     def getwork(self, data=None):
         """
