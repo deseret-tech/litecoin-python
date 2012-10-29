@@ -13,6 +13,7 @@ from decimal import Decimal
 
 if __name__ == "__main__":
     conn = bitcoinrpc.connect_to_local()
+    assert(conn.getinfo().testnet) # don't test on prodnet
 
     assert(type(conn.getblockcount()) is int)
     assert(type(conn.getconnectioncount()) is int)
