@@ -9,13 +9,15 @@ sys.path.append('../src')
 import bitcoinrpc
 from bitcoinrpc.exceptions import BitcoinException,InsufficientFunds
 
+from decimal import Decimal
+
 if __name__ == "__main__":
     conn = bitcoinrpc.connect_to_local()
+    assert(conn.getinfo().testnet) # don't test on prodnet
 
     assert(type(conn.getblockcount()) is int)
-    assert(type(conn.getblocknumber()) is int)
     assert(type(conn.getconnectioncount()) is int)
-    assert(type(conn.getdifficulty()) is float)
+    assert(type(conn.getdifficulty()) is Decimal)
     assert(type(conn.getgenerate()) is bool)
     conn.setgenerate(True)
     conn.setgenerate(True, 2)
@@ -40,15 +42,15 @@ if __name__ == "__main__":
     assert(x.isvalid == True)
     x = conn.validateaddress("invalid")
     assert(x.isvalid == False)
-    
-    tx = conn.listtransactions()
-    txid = tx[0].txid
-    txdata = conn.gettransaction(txid)
-    assert(txdata.txid == tx[0].txid)
+
+    for accid in conn.listaccounts():
+      tx = conn.listtransactions(accid)
+      if len(tx) > 0:
+        txid = tx[0].txid
+        txdata = conn.gettransaction(txid)
+        assert(txdata.txid == tx[0].txid)
 
     info = conn.getinfo()
     print "Blocks: %i" % info.blocks
     print "Connections: %i" % info.connections
     print "Difficulty: %f" % info.difficulty
-
-    
