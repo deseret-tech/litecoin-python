@@ -39,7 +39,8 @@ def connect_to_local(filename = None):
 
     return BitcoinConnection(rcpuser,cfg['rpcpassword'],'localhost',port)
 
-def connect_to_remote(user, password, host='localhost', port=8332):
+def connect_to_remote(user, password, host='localhost', port=8332,
+                      use_https=False):
     """
     Connect to remote or alternative local bitcoin client instance.
 
@@ -47,5 +48,5 @@ def connect_to_remote(user, password, host='localhost', port=8332):
     """
     from bitcoinrpc.connection import BitcoinConnection
 
-    return BitcoinConnection(user, password, host, port)
+    return BitcoinConnection(user, password, host, port, use_https)
 
