@@ -1,4 +1,3 @@
-
 """
   Copyright 2011 Jeff Garzik
 
@@ -102,8 +101,9 @@ class AuthServiceProxy(object):
          resp = httpresp.read()
          resp = resp.decode('utf8')
          resp = json.loads(resp, parse_float=decimal.Decimal)
-         if resp['error'] != None:
-             raise JSONRPCException(resp['error'])
+         if 'error' in resp:
+             if resp['error'] != None:
+                 raise JSONRPCException(resp['error'])
          elif 'result' not in resp:
              raise JSONRPCException({
                      'code' : -343, 'message' : 'missing JSON-RPC result'})
