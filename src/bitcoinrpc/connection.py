@@ -304,6 +304,22 @@ class BitcoinConnection(object):
             raise _wrap_exception(e.error)
 
 
+    def getrawtransaction(self, txid):
+        """
+        Get transaction raw info
+
+        Arguments:
+
+        - *txid* -- Transactiond id for which the info should be returned
+
+        """
+        try:
+            return TransactionInfo(**self.proxy.getrawtransaction(txid,1))
+        except JSONRPCException,e:
+            raise _wrap_exception(e.error)
+
+
+
     def listsinceblock(self, block_hash):
         try:
             res = self.proxy.listsinceblock(block_hash)
