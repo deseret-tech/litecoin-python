@@ -20,6 +20,7 @@
 """
 bitcoin-python - Easy-to-use Bitcoin API client
 """
+
 def connect_to_local(filename = None):
     """
     Connect to default bitcoin instance owned by this user, on this machine.
@@ -34,7 +35,7 @@ def connect_to_local(filename = None):
     from bitcoinrpc.config import read_default_config
 
     cfg = read_default_config(filename)
-    port = int(cfg.get('rpcport', '8332'))
+    port = int(cfg.get('rpcport', '18332' if cfg.get('testnet') else '8332'))
     rcpuser = cfg.get('rpcuser', '')
 
     return BitcoinConnection(rcpuser,cfg['rpcpassword'],'localhost',port)
