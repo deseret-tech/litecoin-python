@@ -114,7 +114,7 @@ simply want to have a clear separation between customers payments.
 
 For this, see the `Account API`_ documentation.
 
-.. _main bitcoin documentation: https://www.bitcoin.org/wiki/doku.php
-.. _account API: https://www.bitcoin.org/wiki/doku.php?id=accounts
+.. _main bitcoin documentation: https://en.bitcoin.it/wiki/Main_Page
+.. _account API: https://en.bitcoin.it/wiki/Accounts_explained
 
 
