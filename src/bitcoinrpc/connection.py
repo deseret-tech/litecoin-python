@@ -22,7 +22,8 @@ Connect to Bitcoin server via JSON-RPC.
 """
 from bitcoinrpc.proxy import JSONRPCException, AuthServiceProxy
 from bitcoinrpc.exceptions import _wrap_exception
-from bitcoinrpc.data import ServerInfo,AccountInfo,AddressInfo,TransactionInfo,AddressValidation,WorkItem
+from bitcoinrpc.data import (ServerInfo, AccountInfo, AddressInfo, TransactionInfo,
+                             AddressValidation, WorkItem, MiningInfo)
 
 class BitcoinConnection(object):
     """
@@ -45,6 +46,7 @@ class BitcoinConnection(object):
         """
         url = ('https' if use_https else 'http') \
               + '://%s:%s@%s:%s/' % (user, password, host, port)
+        self.url = url
         try:
             self.proxy = AuthServiceProxy(url)
         except JSONRPCException,e:
@@ -159,6 +161,16 @@ class BitcoinConnection(object):
         try:
             return ServerInfo(**self.proxy.getinfo())
         except JSONRPCException,e:
+            raise _wrap_exception(e.error)
+
+    def getmininginfo(self):
+        """
+        Returns an :class:`~bitcoinrpc.data.MiningInfo` object containing various
+        mining state info.
+        """
+        try:
+            return MiningInfo(**self.proxy.getmininginfo())
+        except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
     def getnewaddress(self, account=None):
