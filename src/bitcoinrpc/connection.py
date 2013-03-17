@@ -540,4 +540,21 @@ class BitcoinConnection(object):
         except JSONRPCException,e:
             raise _wrap_exception(e.error)
 
+    def listunspent(self, minconf=1, maxconf=999999):
+        """
+        Returns a list of unspent transaction inputs in the wallet.
+
+        Arguments:
+
+        - *minconf* -- Minimum number of confirmations required to be listed.
+
+        - *maxconf* -- Maximal number of confirmations allowed to be listed.
+
+
+        """
+        try:
+            return [TransactionInfo(**tx) for tx in
+                    self.proxy.listunspent(minconf, maxconf)]
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
 
