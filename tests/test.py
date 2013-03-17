@@ -7,7 +7,7 @@ import sys
 sys.path.append('../src')
 
 import bitcoinrpc
-from bitcoinrpc.exceptions import BitcoinException,InsufficientFunds
+# from bitcoinrpc.exceptions import BitcoinException, InsufficientFunds 
 
 from decimal import Decimal
 

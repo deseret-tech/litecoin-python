@@ -1,15 +1,15 @@
 # Copyright (c) 2010 Witchspace <witchspace81@gmail.com>
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,6 +20,8 @@
 """
 Utilities for reading bitcoin configuration files.
 """
+
+
 def read_config_file(filename):
     """
     Read a simple ``'='``-delimited config file.
@@ -36,12 +38,13 @@ def read_config_file(filename):
                     (key, value) = line.split('=', 1)
                     cfg[key] = value
                 except ValueError:
-                    pass # Happens when line has no '=', ignore
+                    pass  # Happens when line has no '=', ignore
     finally:
         f.close()
     return cfg
 
-def read_default_config(filename = None):
+
+def read_default_config(filename=None):
     """
     Read bitcoin default configuration from the current user's home directory.
 
@@ -50,7 +53,8 @@ def read_default_config(filename = None):
     - `filename`: Path to a configuration file in a non-standard location (optional)
     """
     if filename is None:
-        import os, platform
+        import os
+        import platform
         home = os.getenv("HOME")
         if not home:
             raise IOError("Home directory not defined, don't know where to look for config file")
@@ -67,7 +71,5 @@ def read_default_config(filename = None):
 
     try:
         return read_config_file(filename)
-    except (IOError,ValueError):
-        pass # Cannot read config file, ignore
-
-
+    except (IOError, ValueError):
+        pass  # Cannot read config file, ignore

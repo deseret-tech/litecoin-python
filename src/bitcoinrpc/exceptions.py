@@ -1,15 +1,15 @@
 # Copyright (c) 2010 Witchspace <witchspace81@gmail.com>
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,10 +20,12 @@
 """
 Exception definitions.
 """
+
+
 class BitcoinException(Exception):
     """
     Base class for exceptions received from Bitcoin server.
-    
+
     - *code* -- Error code from ``bitcoind``.
     """
     # Standard JSON-RPC 2.0 errors
@@ -57,38 +59,44 @@ class BitcoinException(Exception):
     WALLET_WRONG_ENC_STATE      = -15 # Command given in wrong wallet encryption state (encrypting an encrypted wallet etc.)
     WALLET_ENCRYPTION_FAILED    = -16 # Failed to encrypt the wallet
     WALLET_ALREADY_UNLOCKED     = -17 # Wallet is already unlocked
- 
+
     def __init__(self, error):
         Exception.__init__(self, error['message'])
         self.code = error['code']
 
-##### General application defined errors 
+
+##### General application defined errors
 class SafeMode(BitcoinException):
     """
     Operation denied in safe mode (run ``bitcoind`` with ``-disablesafemode``).
     """
 
+
 class JSONTypeError(BitcoinException):
     """
     Unexpected type was passed as parameter
     """
-InvalidAmount = JSONTypeError # Backwards compatibility
+InvalidAmount = JSONTypeError  # Backwards compatibility
+
 
 class InvalidAddressOrKey(BitcoinException):
     """
     Invalid address or key.
     """
-InvalidTransactionID = InvalidAddressOrKey # Backwards compatibility
+InvalidTransactionID = InvalidAddressOrKey  # Backwards compatibility
+
 
 class OutOfMemory(BitcoinException):
     """
     Out of memory during operation.
     """
 
+
 class InvalidParameter(BitcoinException):
     """
     Invalid parameter provided to RPC call.
     """
+
 
 ##### Client errors
 class ClientException(BitcoinException):
@@ -98,22 +106,26 @@ class ClientException(BitcoinException):
     for other P2P client exceptions.
     """
 
+
 class NotConnected(ClientException):
     """
     Not connected to any peers.
     """
+
 
 class DownloadingBlocks(ClientException):
     """
     Client is still downloading blocks.
     """
 
+
 ##### Wallet errors
 class WalletError(BitcoinException):
     """
     Unspecified problem with wallet (key not found etc.)
     """
-SendError = WalletError # Backwards compatibility
+SendError = WalletError  # Backwards compatibility
+
 
 class InsufficientFunds(WalletError):
     """
@@ -134,9 +146,9 @@ _exception_map = {
     BitcoinException.CLIENT_IN_INITIAL_DOWNLOAD: DownloadingBlocks
 }
 
+
 def _wrap_exception(error):
     """
     Convert a JSON error object to a more specific Bitcoin exception.
     """
-    return _exception_map.get(error['code'], BitcoinException)(error)   
-
+    return _exception_map.get(error['code'], BitcoinException)(error)

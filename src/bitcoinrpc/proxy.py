@@ -49,10 +49,12 @@ USER_AGENT = "AuthServiceProxy/0.1"
 
 HTTP_TIMEOUT = 30
 
+
 class JSONRPCException(Exception):
     def __init__(self, rpcError):
         Exception.__init__(self)
         self.error = rpcError
+
 
 class AuthServiceProxy(object):
     def __init__(self, serviceURL, serviceName=None):
@@ -126,4 +128,3 @@ class AuthServiceProxy(object):
          resp = resp.decode('utf8')
          resp = json.loads(resp, parse_float=decimal.Decimal)
          return resp
-
