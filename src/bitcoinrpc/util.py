@@ -43,7 +43,8 @@ class DStruct(object):
         self.__dict__.update(args_d)
 
     def __repr__(self):
-        rv = []
-        for (k, v) in self.__dict__.iteritems():
-            rv.append(k+"="+v.__repr__())
-        return self.__class__.__module__+"."+self.__class__.__name__+"("+(",".join(rv))+")"
+        return '{module}.{classname}({slots})'.format(
+            module=self.__class__.__module__, classname=self.__class__.__name__,
+            slots=", ".join('{k}={v!r}'.format(k=k, v=v) for k, v in
+                            self.__dict__.iteritems()))
+
