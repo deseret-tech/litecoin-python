@@ -128,4 +128,28 @@ class WorkItem(DStruct):
     """
     
 
+class MiningInfo(DStruct):
+    """
+    Information object returned by :func:`~bitcoinrpc.connection.BitcoinConnection.getmininginfo`.
 
+    - *blocks* -- Number of blocks.
+
+    - *currentblocksize* -- Size of current block.
+
+    - *currentblocktx* -- Number of transactions in current block.
+    
+    - *difficulty* -- Current generating difficulty.
+    
+    - *errors* -- Number of errors.
+    
+    - *generate* -- True if generation enabled, False if not.
+    
+    - *genproclimit* -- Processor limit for generation.
+    
+    - *hashespersec* -- Number of hashes per second (if generation enabled).
+
+    - *pooledtx* -- Number of pooled transactions.
+    
+    - *testnet* -- True if connected to testnet, False if on real network.
+    
+    """
