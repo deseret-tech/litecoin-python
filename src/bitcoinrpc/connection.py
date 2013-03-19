@@ -315,17 +315,82 @@ class BitcoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def getrawtransaction(self, txid):
+    def getrawtransaction(self, txid, verbose=True):
         """
         Get transaction raw info
 
         Arguments:
 
-        - *txid* -- Transactiond id for which the info should be returned
+        - *txid* -- Transactiond id for which the info should be returned.
+        - *verbose* -- If False, return only the "hex" of the transaction.
 
         """
         try:
-            return TransactionInfo(**self.proxy.getrawtransaction(txid, 1))
+            if verbose:
+                return TransactionInfo(**self.proxy.getrawtransaction(txid, 1))
+            return self.proxy.getrawtransaction(txid, 0)
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+
+    def createrawtransaction(self, inputs, outputs):
+        """
+        Creates a raw transaction spending given inputs
+        (a list of dictionaries, each containing a transaction id and an output number),
+        sending to given address(es).
+
+        Returns hex-encoded raw transaction.
+
+        Example usage:
+        >>> conn.createrawtransaction(
+                [{"txid": "a9d4599e15b53f3eb531608ddb31f48c695c3d0b3538a6bda871e8b34f2f430c",
+                  "vout": 0}],
+                {"mkZBYBiq6DNoQEKakpMJegyDbw2YiNQnHT":50})
+
+
+        Arguments:
+
+        - *inputs* -- A list of {"txid": txid, "vout": n} dictionaries.
+        - *outputs* -- A dictionary mapping (public) addresses to the amount
+                       they are to be paid.
+        """
+        try:
+            return self.proxy.createrawtransaction(inputs, outputs)
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+
+    def signrawtransaction(self, hexstring, previous_transactions=None, private_keys=None):
+        """
+        Sign inputs for raw transaction (serialized, hex-encoded).
+
+        Returns a dictionary with the keys:
+            "hex": raw transaction with signature(s) (hex-encoded string)
+            "complete": 1 if transaction has a complete set of signature(s), 0 if not
+
+        Arguments:
+
+        - *hexstring* -- A hex string of the transaction to sign.
+        - *previous_transactions* -- A (possibly empty) list of dictionaries of the form:
+            {"txid": txid, "vout": n, "scriptPubKey": hex, "redeemScript": hex}, representing
+            previous transaction outputs that this transaction depends on but may not yet be
+            in the block chain.
+        - *private_keys* -- A (possibly empty) list of base58-encoded private
+            keys that, if given, will be the only keys used to sign the transaction.
+        """
+        try:
+            return dict(self.proxy.signrawtransaction(hexstring, previous_transactions, private_keys))
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+
+    def decoderawtransaction(self, hexstring):
+        """
+        Produces a human-readable JSON object for a raw transaction.
+
+        Arguments:
+
+        - *hexstring* -- A hex string of the transaction to be decoded.
+        """
+        try:
+            return dict(self.proxy.decoderawtransaction(hexstring))
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
