@@ -53,6 +53,9 @@ class ServerInfo(DStruct):
 
     - *generate* -- True if generation enabled, False if not.
 
+    - *unlocked_until* -- Timestamp (seconds since epoch) after which the wallet
+                          will be/was locked (if wallet encryption is enabled).
+
     """
 
 

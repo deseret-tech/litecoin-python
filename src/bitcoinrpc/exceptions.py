@@ -126,12 +126,53 @@ class WalletError(BitcoinException):
     """
 SendError = WalletError  # Backwards compatibility
 
-
 class InsufficientFunds(WalletError):
     """
-    Insufficient funds to complete transaction.
+    Insufficient funds to complete transaction in wallet or account
+    """
+    
+class InvalidAccountName(WalletError):
+    """
+    Invalid account name
     """
 
+
+class KeypoolRanOut(WalletError):
+    """
+    Keypool ran out, call keypoolrefill first
+    """
+
+
+class WalletUnlockNeeded(WalletError):
+    """
+    Enter the wallet passphrase with walletpassphrase first
+    """
+
+
+class WalletPassphraseIncorrect(WalletError):
+    """
+    The wallet passphrase entered was incorrect
+    """
+
+
+class WalletWrongEncState(WalletError):
+    """
+    Command given in wrong wallet encryption state (encrypting an encrypted wallet etc.)
+    """
+
+
+class WalletEncryptionFailed(WalletError):
+    """
+    Failed to encrypt the wallet
+    """
+
+
+class WalletAlreadyUnlocked(WalletError):
+    """
+    Wallet is already unlocked
+    """
+
+    
 # For convenience, we define more specific exception classes
 # for the more common errors.
 _exception_map = {
@@ -143,7 +184,15 @@ _exception_map = {
     BitcoinException.OUT_OF_MEMORY: OutOfMemory,
     BitcoinException.INVALID_PARAMETER: InvalidParameter,
     BitcoinException.CLIENT_NOT_CONNECTED: NotConnected,
-    BitcoinException.CLIENT_IN_INITIAL_DOWNLOAD: DownloadingBlocks
+    BitcoinException.CLIENT_IN_INITIAL_DOWNLOAD: DownloadingBlocks,
+    BitcoinException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
+    BitcoinException.WALLET_INVALID_ACCOUNT_NAME: InvalidAccountName,
+    BitcoinException.WALLET_KEYPOOL_RAN_OUT: KeypoolRanOut,
+    BitcoinException.WALLET_UNLOCK_NEEDED: WalletUnlockNeeded,
+    BitcoinException.WALLET_PASSPHRASE_INCORRECT: WalletPassphraseIncorrect,
+    BitcoinException.WALLET_WRONG_ENC_STATE: WalletWrongEncState,
+    BitcoinException.WALLET_ENCRYPTION_FAILED: WalletEncryptionFailed,
+    BitcoinException.WALLET_ALREADY_UNLOCKED: WalletAlreadyUnlocked,
 }
 
 

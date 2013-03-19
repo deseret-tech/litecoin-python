@@ -593,3 +593,43 @@ class BitcoinConnection(object):
                     self.proxy.listunspent(minconf, maxconf)]
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
+
+    def walletpassphrase(self, passphrase, timeout, dont_raise=False):
+        """
+        Stores the wallet decryption key in memory for <timeout> seconds.
+
+        - *passphrase* -- The wallet passphrase.
+
+        - *timeout* -- Time in seconds to keep the wallet unlocked
+                       (by keeping the passphrase in memory).
+
+        - *dont_raise* -- instead of raising `~bitcoinrpc.exceptions.WalletPassphraseIncorrect`
+                          return False.
+        """
+        try:
+            return self.proxy.walletpassphrase(passphrase, timeout)
+        except JSONRPCException as e:
+            if dont_raise:
+                return False
+            raise _wrap_exception(e.error)
+
+    def walletlock(self):
+        """
+        Removes the wallet encryption key from memory, locking the wallet.
+        After calling this method, you will need to call walletpassphrase
+        again before being able to call any methods which require the wallet
+        to be unlocked.
+        """
+        try:
+            return self.proxy.walletlock()
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
+
+    def walletpassphrasechange(self, oldpassphrase, newpassphrase):
+        """
+        Changes the wallet passphrase from <oldpassphrase> to <newpassphrase>.
+        """
+        try:
+            return self.proxy.walletpassphrasechange(oldpassphrase, newpassphrase)
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
