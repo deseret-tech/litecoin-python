@@ -50,7 +50,16 @@ if __name__ == "__main__":
         txdata = conn.gettransaction(txid)
         assert(txdata.txid == tx[0].txid)
 
+    assert(type(conn.listunspent()) is list)  # needs better testing
+
     info = conn.getinfo()
     print "Blocks: %i" % info.blocks
     print "Connections: %i" % info.connections
     print "Difficulty: %f" % info.difficulty
+    
+    m_info = conn.getmininginfo()
+    print ("Pooled Transactions: {pooledtx}\n"
+           "Testnet: {testnet}\n"
+           "Hash Rate: {hashes} H/s".format(pooledtx=m_info.pooledtx,
+                                            testnet=m_info.testnet,
+                                            hashes=m_info.hashespersec))
