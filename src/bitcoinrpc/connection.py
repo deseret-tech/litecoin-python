@@ -357,17 +357,20 @@ class BitcoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def listaccounts(self, minconf=1):
+    def listaccounts(self, minconf=1, as_dict=False):
         """
         Returns a list of account names.
 
         Arguments:
 
         - *minconf* -- Minimum number of confirmations before payments are included.
+        - *as_dict* -- Returns a dictionary of account names, with their balance as values.
         """
         try:
-            #return [AccountInfo(**x) for x in self.proxy.listaccounts(minconf)]
-            return [x for x in self.proxy.listaccounts(minconf)]
+            if as_dict:
+                return dict(self.proxy.listaccounts(minconf))
+            else:
+                return self.proxy.listaccounts(minconf).keys()
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
