@@ -96,11 +96,9 @@ class BitcoinConnection(object):
     def getblocknumber(self):
         """
         Returns the block number of the latest block in the longest block chain.
+        Deprecated. Use getblockcount instead.
         """
-        try:
-            return self.proxy.getblocknumber()
-        except JSONRPCException as e:
-            raise _wrap_exception(e.error)
+        return self.getblockcount()
 
     def getconnectioncount(self):
         """
