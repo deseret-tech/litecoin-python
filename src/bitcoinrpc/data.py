@@ -88,6 +88,10 @@ class TransactionInfo(DStruct):
     """
     Information object returned by :func:`~bitcoinrpc.connection.BitcoinConnection.listtransactions`.
 
+    - *account* -- account name.
+
+    - *address* -- the address bitcoins were sent to, or received from.
+    
     - *category* -- will be generate, send, receive, or move.
 
     - *amount* -- amount of transaction.
