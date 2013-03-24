@@ -43,7 +43,7 @@ if __name__ == "__main__":
     x = conn.validateaddress("invalid")
     assert(x.isvalid == False)
 
-    for accid in conn.listaccounts():
+    for accid in conn.listaccounts(as_dict=True).iterkeys():
       tx = conn.listtransactions(accid)
       if len(tx) > 0:
         txid = tx[0].txid
