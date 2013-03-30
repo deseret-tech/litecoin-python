@@ -1,17 +1,136 @@
+2013-03-30  Wladimir van der Laan <laanwj@gmail.com>
+
+	* Release 0.3
+
+2013-03-30 16:13:06 +0100 Aviad Reich 
+
+	* add keypoolrefill method (HEAD, origin/master, master)
+
+2013-03-20 00:33:59 +0200 Aviad Reich 
+
+	* raw transaction support added (rawtransactions)
+
+2013-03-21 14:41:33 +0200 Aviad Reich 
+
+	* cherry pick to fix dont_raise so it only blocks the correct exceptions to return a boolean (origin/wallet_locking)
+
+2013-03-29 10:15:09 +0300 Aviad Reich 
+
+	* ignore dist and python_egg
+
+2013-03-23 19:08:46 +0000 Aviad Reich 
+
+	* deprecated getblocknumber - use getblockcount instead
+
+2013-03-19 23:01:18 +0200 Aviad Reich 
+
+	* add wallet locking/unlocking support
+
+2013-03-19 14:42:26 +0200 Aviad Reich 
+
+	* in listtransactions, iterate all accounts if account is None (origin/listtransactions)
+
+2013-03-19 11:16:38 +0200 Aviad Reich 
+
+	* listaccounts can return a dictionary from account names to their balance if the param as_dict is True, update tests. (origin/listaccounts)
+
+2013-03-19 09:44:20 +0200 Aviad Reich 
+
+	* add tests for listunspent and getmininginfo
+
+2013-03-18 08:18:23 +0200 Aviad Reich 
+
+	* refactor __repr__
+
+2013-03-17 09:43:44 +0200 Aviad Reich 
+
+	* flake8 style conventions fixes
+
+2013-03-18 00:13:42 +0200 Aviad Reich 
+
+	* add listunspent method
+
+2013-03-17 23:46:44 +0200 Aviad Reich 
+
+	* add support for getmininginfo
+
+2013-03-17 16:37:09 +0200 Aviad Reich 
+
+	* Issue #15: add from parameter to listtransactions
+
+2013-03-15 22:14:10 +0100 David Barton 
+
+	* Fixed usage.rst broken links
+
+2013-03-14 09:26:23 +0200 Aviad Reich 
+
+	* connect_to_local(): use default testnet port, when the config file has testnet=x
+
+2013-02-10 17:35:14 +0100 Adrian 
+
+	* Add getrawtransaction method
+
+2013-01-16 03:28:11 +0100 Thomas Steen Rasmussen 
+
+	* fix bug when rpc reply error is null in json
+
+2012-12-12 00:14:34 +0100 Benoît HERVIER 
+
+	* There isn't always an error key in resp dict
+
+2012-12-12 00:10:41 +0100 Benoît HERVIER 
+
+	* Allow use of https
+
+2012-10-29 16:46:18 +0100 Harald Schilly 
+
+	* assert that we are really in the testnet
+
+2012-10-28 23:25:25 +0100 Harald Schilly 
+
+	* optionally allow to pass in the path to the bitcoin.conf file if it is at a non-standard path
+
+2012-10-28 21:52:48 +0100 Harald Schilly 
+
+	* fixing tests
+
+2012-10-23 02:57:40 +0200 Thomas Steen Rasmussen 
+
+	* Add support for the 'verifymessage' RPC command
+
+2012-10-05 18:45:50 +0200 Wladimir J. van der Laan 
+
+	* Switch to jgarzik's jsonrpc implementation
+
+2012-10-05 18:32:23 +0200 Wladimir J. van der Laan 
+
+	* Use RPC error codes from bitcoin core source
+
+2012-07-15 12:07:53 +0400 Alexander Petrovich 
+
+	* Added listsinceblock, getblock, getblockhash
+
+2011-09-04 15:17:44 +0200 Jure Vrscaj 
+
+	* Added sendmany command.
+
+2011-08-24 14:53:53 +0200 Wladimir J. van der Laan 
+
+	* allow listtransactions() (default to '' account), add test for gettransaction
+
 2012-10-23  Thomas Steen Rasmussen <thomas@gibfest.dk>
 
-* Add "verifymessage" command
-
+	* Add "verifymessage" command
 
 2011-08-24  Wladimir van der Laan <laanwj@gmail.com>
 
-* Add metadata for PyPi packaging
+	* Add metadata for PyPi packaging
 
-* Add Changelog
+	* Add Changelog
 
-* Rename package to 'bitcoinrpc' instead of 'bitcoin', makes more sense as this is a RPC
-  client not a bitcoin client implementation.
+	* Rename package to 'bitcoinrpc' instead of 'bitcoin', makes more sense as this is a RPC
+	  client not a bitcoin client implementation.
 
-* Add COPYING (MIT license)
+	* Add COPYING (MIT license)
 
-* Add "gettransaction" command (thanks chopachom)
+	* Add "gettransaction" command (thanks chopachom)
