@@ -656,6 +656,13 @@ class BitcoinConnection(object):
                     self.proxy.listunspent(minconf, maxconf)]
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
+    
+    def keypoolrefill(self):
+        "Fills the keypool, requires wallet passphrase to be set."
+        try:
+            self.proxy.keypoolrefill()
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
 
     def walletpassphrase(self, passphrase, timeout, dont_raise=False):
         """
