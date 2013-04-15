@@ -517,7 +517,7 @@ class BitcoinConnection(object):
 
         """
         args = []
-        if account:
+        if account is not None:
             args.append(account)
             if minconf is not None:
                 args.append(minconf)
