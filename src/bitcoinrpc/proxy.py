@@ -102,7 +102,7 @@ class RPCMethod(object):
         self._service_proxy = service_proxy
 
     def __getattr__(self, name):
-        new_name = '{0}.{1}'.format(self._method_name, name)
+        new_name = '{}.{}'.format(self._method_name, name)
         return RPCMethod(new_name, self._service_proxy)
 
     def __call__(self, *args):
@@ -124,7 +124,7 @@ class RPCMethod(object):
             return resp['result']
 
     def __repr__(self):
-        return "<RPCMethod object \"{name}\">".format(name=self._method_name)
+        return '<RPCMethod object "{name}">'.format(name=self._method_name)
 
 
 class AuthServiceProxy(object):
