@@ -74,6 +74,8 @@ class HTTPTransport(object):
         if httpresp is None:
             raise JSONRPCException({
                 'code': -342, 'message': 'missing HTTP response from server'})
+        elif httpresp.status == httplib.FORBIDDEN:
+            raise Exception("bitcoind returns 403 Forbidden. Is your IP allowed?")
 
         resp = httpresp.read()
         return resp.decode('utf8')
