@@ -1,7 +1,7 @@
-:mod:`bitcoinrpc.config` --- Utilities for reading bitcoin configuration files
+:mod:`litecoinrpc.exceptions` --- Exception definitions
 ====================================================================================
 
-.. automodule:: bitcoinrpc.config
+.. automodule:: litecoinrpc.exceptions
    :members:
    :show-inheritance:
-   
+      

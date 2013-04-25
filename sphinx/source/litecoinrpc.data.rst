@@ -1,7 +1,7 @@
-:mod:`bitcoinrpc.util` --- Generic utilities used by bitcoin client library
+:mod:`litecoinrpc.data` --- Litecoin RPC service, data objects
 ====================================================================================
 
-.. automodule:: bitcoinrpc.util
+.. automodule:: litecoinrpc.data
    :members:
    :show-inheritance:
    

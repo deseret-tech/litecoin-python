@@ -1,9 +1,9 @@
 ==================================================
- bitcoin-python - Easy-to-use Bitcoin API client.
+ litecoin-python - Easy-to-use Litecoin API client.
 ==================================================
 
-``bitcoin-python`` is a set of Python libraries that allows easy access to the
-bitcoin_ peer-to-peer cryptocurrency client API.
+``litecoin-python`` is a set of Python libraries that allows easy access to the
+litecoin_ peer-to-peer cryptocurrency client API.
 
 Contents:
 
@@ -20,5 +20,5 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-.. _bitcoin: https://www.bitcoin.org/
+.. _litecoin: https://www.litecoin.org/
 

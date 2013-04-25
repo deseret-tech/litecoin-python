@@ -1,18 +1,18 @@
 '''
 Test script
-*WARNING* Don't run this on a production bitcoin server! *WARNING*
+*WARNING* Don't run this on a production litecoin server! *WARNING*
 Only on the test network.
 '''
 import sys
 sys.path.append('../src')
 
-import bitcoinrpc
-# from bitcoinrpc.exceptions import BitcoinException, InsufficientFunds 
+import litecoinrpc
+# from litecoinrpc.exceptions import LitecoinException, InsufficientFunds 
 
 from decimal import Decimal
 
 if __name__ == "__main__":
-    conn = bitcoinrpc.connect_to_local()
+    conn = litecoinrpc.connect_to_local()
     assert(conn.getinfo().testnet) # don't test on prodnet
 
     assert(type(conn.getblockcount()) is int)
@@ -25,15 +25,15 @@ if __name__ == "__main__":
     assert(type(conn.gethashespersec()) is int)
     account = "testaccount"
     account2 = "testaccount2"
-    bitcoinaddress = conn.getnewaddress(account)
-    conn.setaccount(bitcoinaddress, account)
+    litecoinaddress = conn.getnewaddress(account)
+    conn.setaccount(litecoinaddress, account)
     address = conn.getaccountaddress(account)
     address2 = conn.getaccountaddress(account2)
     assert(conn.getaccount(address) == account) 
     addresses = conn.getaddressesbyaccount(account)
     assert(address in addresses)
-    #conn.sendtoaddress(bitcoinaddress, amount, comment=None, comment_to=None)
-    conn.getreceivedbyaddress(bitcoinaddress)
+    #conn.sendtoaddress(litecoinaddress, amount, comment=None, comment_to=None)
+    conn.getreceivedbyaddress(litecoinaddress)
     conn.getreceivedbyaccount(account)
     conn.listreceivedbyaddress()
     conn.listreceivedbyaccount()

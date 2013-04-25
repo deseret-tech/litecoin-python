@@ -1,7 +1,8 @@
-:mod:`bitcoinrpc.data` --- Bitcoin RPC service, data objects
+:mod:`litecoinrpc.connection` --- Connect to Litecoin server via JSON-RPC
 ====================================================================================
 
-.. automodule:: bitcoinrpc.data
+.. automodule:: litecoinrpc.connection
    :members:
    :show-inheritance:
-   
+
+

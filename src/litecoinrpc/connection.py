@@ -18,17 +18,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 """
-Connect to Bitcoin server via JSON-RPC.
+Connect to Litecoin server via JSON-RPC.
 """
-from bitcoinrpc.proxy import JSONRPCException, AuthServiceProxy
-from bitcoinrpc.exceptions import _wrap_exception, WalletPassphraseIncorrect, WalletAlreadyUnlocked
-from bitcoinrpc.data import (ServerInfo, AccountInfo, AddressInfo, TransactionInfo,
+from litecoinrpc.proxy import JSONRPCException, AuthServiceProxy
+from litecoinrpc.exceptions import _wrap_exception, WalletPassphraseIncorrect, WalletAlreadyUnlocked
+from litecoinrpc.data import (ServerInfo, AccountInfo, AddressInfo, TransactionInfo,
                              AddressValidation, WorkItem, MiningInfo)
 
 
-class BitcoinConnection(object):
+class LitecoinConnection(object):
     """
-    A BitcoinConnection object defines a connection to a bitcoin server.
+    A LitecoinConnection object defines a connection to a litecoin server.
     It is a thin wrapper around a JSON-RPC API connection.
 
     Up-to-date for SVN revision 198.
@@ -37,13 +37,13 @@ class BitcoinConnection(object):
 
     - *user* -- Authenticate as user.
     - *password* -- Authentication password.
-    - *host* -- Bitcoin JSON-RPC host.
-    - *port* -- Bitcoin JSON-RPC port.
+    - *host* -- Litecoin JSON-RPC host.
+    - *port* -- Litecoin JSON-RPC port.
     """
     def __init__(self, user, password, host='localhost', port=8332,
                  use_https=False):
         """
-        Create a new bitcoin server connection.
+        Create a new litecoin server connection.
         """
         url = 'http{s}://{user}:{password}@{host}:{port}/'.format(
             s='s' if use_https else '',
@@ -56,7 +56,7 @@ class BitcoinConnection(object):
 
     def stop(self):
         """
-        Stop bitcoin server.
+        Stop litecoin server.
         """
         try:
             self.proxy.stop()
@@ -156,7 +156,7 @@ class BitcoinConnection(object):
 
     def getinfo(self):
         """
-        Returns an :class:`~bitcoinrpc.data.ServerInfo` object containing various state info.
+        Returns an :class:`~litecoinrpc.data.ServerInfo` object containing various state info.
         """
         try:
             return ServerInfo(**self.proxy.getinfo())
@@ -165,7 +165,7 @@ class BitcoinConnection(object):
 
     def getmininginfo(self):
         """
-        Returns an :class:`~bitcoinrpc.data.MiningInfo` object containing various
+        Returns an :class:`~litecoinrpc.data.MiningInfo` object containing various
         mining state info.
         """
         try:
@@ -175,7 +175,7 @@ class BitcoinConnection(object):
 
     def getnewaddress(self, account=None):
         """
-        Returns a new bitcoin address for receiving payments.
+        Returns a new litecoin address for receiving payments.
 
         Arguments:
 
@@ -193,7 +193,7 @@ class BitcoinConnection(object):
 
     def getaccountaddress(self, account):
         """
-        Returns the current bitcoin address for receiving payments to an account.
+        Returns the current litecoin address for receiving payments to an account.
 
         Arguments:
 
@@ -205,31 +205,31 @@ class BitcoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def setaccount(self, bitcoinaddress, account):
+    def setaccount(self, litecoinaddress, account):
         """
         Sets the account associated with the given address.
 
         Arguments:
 
-        - *bitcoinaddress* -- Bitcoin address to associate.
+        - *litecoinaddress* -- Litecoin address to associate.
         - *account* -- Account to associate the address to.
 
         """
         try:
-            return self.proxy.setaccount(bitcoinaddress, account)
+            return self.proxy.setaccount(litecoinaddress, account)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def getaccount(self, bitcoinaddress):
+    def getaccount(self, litecoinaddress):
         """
         Returns the account associated with the given address.
 
         Arguments:
 
-        - *bitcoinaddress* -- Bitcoin address to get account for.
+        - *litecoinaddress* -- Litecoin address to get account for.
         """
         try:
-            return self.proxy.getaccount(bitcoinaddress)
+            return self.proxy.getaccount(litecoinaddress)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
@@ -246,13 +246,13 @@ class BitcoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def sendtoaddress(self, bitcoinaddress, amount, comment=None, comment_to=None):
+    def sendtoaddress(self, litecoinaddress, amount, comment=None, comment_to=None):
         """
-        Sends *amount* from the server's available balance to *bitcoinaddress*.
+        Sends *amount* from the server's available balance to *litecoinaddress*.
 
         Arguments:
 
-        - *bitcoinaddress* -- Bitcoin address to send to.
+        - *litecoinaddress* -- Litecoin address to send to.
         - *amount* -- Amount to send (float, rounded to the nearest 0.01).
         - *minconf* -- Minimum number of confirmations required for transferred balance.
         - *comment* -- Comment for transaction.
@@ -261,27 +261,27 @@ class BitcoinConnection(object):
         """
         try:
             if comment is None:
-                return self.proxy.sendtoaddress(bitcoinaddress, amount)
+                return self.proxy.sendtoaddress(litecoinaddress, amount)
             elif comment_to is None:
-                return self.proxy.sendtoaddress(bitcoinaddress, amount, comment)
+                return self.proxy.sendtoaddress(litecoinaddress, amount, comment)
             else:
-                return self.proxy.sendtoaddress(bitcoinaddress, amount, comment, comment_to)
+                return self.proxy.sendtoaddress(litecoinaddress, amount, comment, comment_to)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def getreceivedbyaddress(self, bitcoinaddress, minconf=1):
+    def getreceivedbyaddress(self, litecoinaddress, minconf=1):
         """
-        Returns the total amount received by a bitcoin address in transactions with at least a
+        Returns the total amount received by a litecoin address in transactions with at least a
         certain number of confirmations.
 
         Arguments:
 
-        - *bitcoinaddress* -- Address to query for total amount.
+        - *litecoinaddress* -- Address to query for total amount.
 
         - *minconf* -- Number of confirmations to require, defaults to 1.
         """
         try:
-            return self.proxy.getreceivedbyaddress(bitcoinaddress, minconf)
+            return self.proxy.getreceivedbyaddress(litecoinaddress, minconf)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
@@ -406,7 +406,7 @@ class BitcoinConnection(object):
         """
         Returns a list of addresses.
 
-        Each address is represented with a :class:`~bitcoinrpc.data.AddressInfo` object.
+        Each address is represented with a :class:`~litecoinrpc.data.AddressInfo` object.
 
         Arguments:
 
@@ -441,7 +441,7 @@ class BitcoinConnection(object):
         """
         Returns a list of accounts.
 
-        Each account is represented with a :class:`~bitcoinrpc.data.AccountInfo` object.
+        Each account is represented with a :class:`~litecoinrpc.data.AccountInfo` object.
 
         Arguments:
 
@@ -459,7 +459,7 @@ class BitcoinConnection(object):
         """
         Returns a list of the last transactions for an account.
 
-        Each transaction is represented with a :class:`~bitcoinrpc.data.TransactionInfo` object.
+        Each transaction is represented with a :class:`~litecoinrpc.data.TransactionInfo` object.
 
         Arguments:
 
@@ -493,9 +493,9 @@ class BitcoinConnection(object):
 
     def validateaddress(self, validateaddress):
         """
-        Validate a bitcoin address and return information for it.
+        Validate a litecoin address and return information for it.
 
-        The information is represented by a :class:`~bitcoinrpc.data.AddressValidation` object.
+        The information is represented by a :class:`~litecoinrpc.data.AddressValidation` object.
 
         Arguments: -- Address to validate.
 
@@ -547,18 +547,18 @@ class BitcoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def sendfrom(self, fromaccount, tobitcoinaddress, amount, minconf=1, comment=None,
+    def sendfrom(self, fromaccount, tolitecoinaddress, amount, minconf=1, comment=None,
                  comment_to=None):
         """
-        Sends amount from account's balance to bitcoinaddress. This method will fail
-        if there is less than amount bitcoins with minconf confirmations in the account's
+        Sends amount from account's balance to litecoinaddress. This method will fail
+        if there is less than amount litecoins with minconf confirmations in the account's
         balance (unless account is the empty-string-named default account; it
         behaves like the sendtoaddress method). Returns transaction ID on success.
 
         Arguments:
 
         - *fromaccount* -- Account to send from.
-        - *tobitcoinaddress* -- Bitcoin address to send to.
+        - *tolitecoinaddress* -- Litecoin address to send to.
         - *amount* -- Amount to send (float, rounded to the nearest 0.01).
         - *minconf* -- Minimum number of confirmations required for transferred balance.
         - *comment* -- Comment for transaction.
@@ -567,26 +567,26 @@ class BitcoinConnection(object):
         """
         try:
             if comment is None:
-                return self.proxy.sendfrom(fromaccount, tobitcoinaddress, amount, minconf)
+                return self.proxy.sendfrom(fromaccount, tolitecoinaddress, amount, minconf)
             elif comment_to is None:
-                return self.proxy.sendfrom(fromaccount, tobitcoinaddress, amount, minconf, comment)
+                return self.proxy.sendfrom(fromaccount, tolitecoinaddress, amount, minconf, comment)
             else:
-                return self.proxy.sendfrom(fromaccount, tobitcoinaddress, amount, minconf,
+                return self.proxy.sendfrom(fromaccount, tolitecoinaddress, amount, minconf,
                                            comment, comment_to)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
     def sendmany(self, fromaccount, todict, minconf=1, comment=None):
         """
-        Sends specified amounts from account's balance to bitcoinaddresses. This method will fail
-        if there is less than total amount bitcoins with minconf confirmations in the account's
+        Sends specified amounts from account's balance to litecoinaddresses. This method will fail
+        if there is less than total amount litecoins with minconf confirmations in the account's
         balance (unless account is the empty-string-named default account; Returns transaction ID
         on success.
 
         Arguments:
 
         - *fromaccount* -- Account to send from.
-        - *todict* -- Dictionary with Bitcoin addresses as keys and amounts as values.
+        - *todict* -- Dictionary with Litecoin addresses as keys and amounts as values.
         - *minconf* -- Minimum number of confirmations required for transferred balance.
         - *comment* -- Comment for transaction.
 
@@ -599,21 +599,21 @@ class BitcoinConnection(object):
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
-    def verifymessage(self, bitcoinaddress, signature, message):
+    def verifymessage(self, litecoinaddress, signature, message):
         """
-        Verifies a signature given the bitcoinaddress used to sign,
+        Verifies a signature given the litecoinaddress used to sign,
         the signature itself, and the message that was signed.
         Returns :const:`True` if the signature is valid, and :const:`False` if it is invalid.
 
         Arguments:
 
-        - *bitcoinaddress* -- the bitcoinaddress used to sign the message
+        - *litecoinaddress* -- the litecoinaddress used to sign the message
         - *signature* -- the signature to be verified
         - *message* -- the message that was originally signed
 
         """
         try:
-            return self.proxy.verifymessage(bitcoinaddress, signature, message)
+            return self.proxy.verifymessage(litecoinaddress, signature, message)
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
 
@@ -622,7 +622,7 @@ class BitcoinConnection(object):
         Get work for remote mining, or submit result.
         If data is specified, the server tries to solve the block
         using the provided data and returns :const:`True` if it was successful.
-        If not, the function returns formatted hash data (:class:`~bitcoinrpc.data.WorkItem`)
+        If not, the function returns formatted hash data (:class:`~litecoinrpc.data.WorkItem`)
         to work on.
 
         Arguments:
@@ -673,7 +673,7 @@ class BitcoinConnection(object):
         - *timeout* -- Time in seconds to keep the wallet unlocked
                        (by keeping the passphrase in memory).
 
-        - *dont_raise* -- instead of raising `~bitcoinrpc.exceptions.WalletPassphraseIncorrect`
+        - *dont_raise* -- instead of raising `~litecoinrpc.exceptions.WalletPassphraseIncorrect`
                           return False.
         """
         try:
@@ -706,7 +706,7 @@ class BitcoinConnection(object):
 
         Arguments:
 
-        - *dont_raise* -- instead of raising `~bitcoinrpc.exceptions.WalletPassphraseIncorrect`
+        - *dont_raise* -- instead of raising `~litecoinrpc.exceptions.WalletPassphraseIncorrect`
                           return False.
         """
         try:

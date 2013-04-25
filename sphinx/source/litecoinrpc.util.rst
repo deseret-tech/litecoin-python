@@ -1,7 +1,7 @@
-:mod:`bitcoinrpc.exceptions` --- Exception definitions
+:mod:`litecoinrpc.util` --- Generic utilities used by litecoin client library
 ====================================================================================
 
-.. automodule:: bitcoinrpc.exceptions
+.. automodule:: litecoinrpc.util
    :members:
    :show-inheritance:
-      
+   

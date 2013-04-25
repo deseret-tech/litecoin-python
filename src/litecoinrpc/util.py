@@ -17,38 +17,33 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"""
-bitcoin-python - Easy-to-use Bitcoin API client
-"""
+"""Generic utilities used by litecoin client library."""
+from copy import copy
 
 
-def connect_to_local(filename=None):
+class DStruct(object):
     """
-    Connect to default bitcoin instance owned by this user, on this machine.
-
-    Returns a :class:`~bitcoinrpc.connection.BitcoinConnection` object.
-
-    Arguments:
-
-        - `filename`: Path to a configuration file in a non-standard location (optional)
+    Simple dynamic structure, like :const:`collections.namedtuple` but more flexible
+    (and less memory-efficient)
     """
-    from bitcoinrpc.connection import BitcoinConnection
-    from bitcoinrpc.config import read_default_config
+    # Default arguments. Defaults are *shallow copied*, to allow defaults such as [].
+    _fields = []
+    _defaults = {}
 
-    cfg = read_default_config(filename)
-    port = int(cfg.get('rpcport', '18332' if cfg.get('testnet') else '8332'))
-    rcpuser = cfg.get('rpcuser', '')
+    def __init__(self, *args_t, **args_d):
+        # order
+        if len(args_t) > len(self._fields):
+            raise TypeError("Number of arguments is larger than of predefined fields")
+        # Copy default values
+        for (k, v) in self._defaults.iteritems():
+            self.__dict__[k] = copy(v)
+        # Set pass by value arguments
+        self.__dict__.update(zip(self._fields, args_t))
+        # dict
+        self.__dict__.update(args_d)
 
-    return BitcoinConnection(rcpuser, cfg['rpcpassword'], 'localhost', port)
-
-
-def connect_to_remote(user, password, host='localhost', port=8332,
-                      use_https=False):
-    """
-    Connect to remote or alternative local bitcoin client instance.
-
-    Returns a :class:`~bitcoinrpc.connection.BitcoinConnection` object.
-    """
-    from bitcoinrpc.connection import BitcoinConnection
-
-    return BitcoinConnection(user, password, host, port, use_https)
+    def __repr__(self):
+        return '{module}.{classname}({slots})'.format(
+            module=self.__class__.__module__, classname=self.__class__.__name__,
+            slots=", ".join('{k}={v!r}'.format(k=k, v=v) for k, v in
+                            self.__dict__.iteritems()))

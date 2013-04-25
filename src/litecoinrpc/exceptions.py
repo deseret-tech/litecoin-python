@@ -22,11 +22,11 @@ Exception definitions.
 """
 
 
-class BitcoinException(Exception):
+class LitecoinException(Exception):
     """
-    Base class for exceptions received from Bitcoin server.
+    Base class for exceptions received from Litecoin server.
 
-    - *code* -- Error code from ``bitcoind``.
+    - *code* -- Error code from ``litecoind``.
     """
     # Standard JSON-RPC 2.0 errors
     INVALID_REQUEST  = -32600,
@@ -46,7 +46,7 @@ class BitcoinException(Exception):
     DESERIALIZATION_ERROR       = -22 # Error parsing or validating structure in raw format
 
     # P2P client errors
-    CLIENT_NOT_CONNECTED        = -9  # Bitcoin is not connected
+    CLIENT_NOT_CONNECTED        = -9  # Litecoin is not connected
     CLIENT_IN_INITIAL_DOWNLOAD  = -10 # Still downloading initial blocks
 
     # Wallet errors
@@ -83,40 +83,40 @@ class TransportException(Exception):
        return self.s
 
 ##### General application defined errors
-class SafeMode(BitcoinException):
+class SafeMode(LitecoinException):
     """
-    Operation denied in safe mode (run ``bitcoind`` with ``-disablesafemode``).
+    Operation denied in safe mode (run ``litecoind`` with ``-disablesafemode``).
     """
 
 
-class JSONTypeError(BitcoinException):
+class JSONTypeError(LitecoinException):
     """
     Unexpected type was passed as parameter
     """
 InvalidAmount = JSONTypeError  # Backwards compatibility
 
 
-class InvalidAddressOrKey(BitcoinException):
+class InvalidAddressOrKey(LitecoinException):
     """
     Invalid address or key.
     """
 InvalidTransactionID = InvalidAddressOrKey  # Backwards compatibility
 
 
-class OutOfMemory(BitcoinException):
+class OutOfMemory(LitecoinException):
     """
     Out of memory during operation.
     """
 
 
-class InvalidParameter(BitcoinException):
+class InvalidParameter(LitecoinException):
     """
     Invalid parameter provided to RPC call.
     """
 
 
 ##### Client errors
-class ClientException(BitcoinException):
+class ClientException(LitecoinException):
     """
     P2P network error.
     This exception is never raised but functions as a superclass
@@ -137,7 +137,7 @@ class DownloadingBlocks(ClientException):
 
 
 ##### Wallet errors
-class WalletError(BitcoinException):
+class WalletError(LitecoinException):
     """
     Unspecified problem with wallet (key not found etc.)
     """
@@ -188,33 +188,33 @@ class WalletAlreadyUnlocked(WalletError):
     """
     Wallet is already unlocked
     """
-
     
+
 # For convenience, we define more specific exception classes
 # for the more common errors.
 _exception_map = {
-    BitcoinException.FORBIDDEN_BY_SAFE_MODE: SafeMode,
-    BitcoinException.TYPE_ERROR: JSONTypeError,
-    BitcoinException.WALLET_ERROR: WalletError,
-    BitcoinException.INVALID_ADDRESS_OR_KEY: InvalidAddressOrKey,
-    BitcoinException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
-    BitcoinException.OUT_OF_MEMORY: OutOfMemory,
-    BitcoinException.INVALID_PARAMETER: InvalidParameter,
-    BitcoinException.CLIENT_NOT_CONNECTED: NotConnected,
-    BitcoinException.CLIENT_IN_INITIAL_DOWNLOAD: DownloadingBlocks,
-    BitcoinException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
-    BitcoinException.WALLET_INVALID_ACCOUNT_NAME: InvalidAccountName,
-    BitcoinException.WALLET_KEYPOOL_RAN_OUT: KeypoolRanOut,
-    BitcoinException.WALLET_UNLOCK_NEEDED: WalletUnlockNeeded,
-    BitcoinException.WALLET_PASSPHRASE_INCORRECT: WalletPassphraseIncorrect,
-    BitcoinException.WALLET_WRONG_ENC_STATE: WalletWrongEncState,
-    BitcoinException.WALLET_ENCRYPTION_FAILED: WalletEncryptionFailed,
-    BitcoinException.WALLET_ALREADY_UNLOCKED: WalletAlreadyUnlocked,
+    LitecoinException.FORBIDDEN_BY_SAFE_MODE: SafeMode,
+    LitecoinException.TYPE_ERROR: JSONTypeError,
+    LitecoinException.WALLET_ERROR: WalletError,
+    LitecoinException.INVALID_ADDRESS_OR_KEY: InvalidAddressOrKey,
+    LitecoinException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
+    LitecoinException.OUT_OF_MEMORY: OutOfMemory,
+    LitecoinException.INVALID_PARAMETER: InvalidParameter,
+    LitecoinException.CLIENT_NOT_CONNECTED: NotConnected,
+    LitecoinException.CLIENT_IN_INITIAL_DOWNLOAD: DownloadingBlocks,
+    LitecoinException.WALLET_INSUFFICIENT_FUNDS: InsufficientFunds,
+    LitecoinException.WALLET_INVALID_ACCOUNT_NAME: InvalidAccountName,
+    LitecoinException.WALLET_KEYPOOL_RAN_OUT: KeypoolRanOut,
+    LitecoinException.WALLET_UNLOCK_NEEDED: WalletUnlockNeeded,
+    LitecoinException.WALLET_PASSPHRASE_INCORRECT: WalletPassphraseIncorrect,
+    LitecoinException.WALLET_WRONG_ENC_STATE: WalletWrongEncState,
+    LitecoinException.WALLET_ENCRYPTION_FAILED: WalletEncryptionFailed,
+    LitecoinException.WALLET_ALREADY_UNLOCKED: WalletAlreadyUnlocked,
 }
 
 
 def _wrap_exception(error):
     """
-    Convert a JSON error object to a more specific Bitcoin exception.
+    Convert a JSON error object to a more specific Litecoin exception.
     """
-    return _exception_map.get(error['code'], BitcoinException)(error)
+    return _exception_map.get(error['code'], LitecoinException)(error)

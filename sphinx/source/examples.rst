@@ -2,25 +2,25 @@
   Examples
 ****************************
 
-A basic program that uses ``python-bitcoin`` looks like this:
+A basic program that uses ``python-litecoin`` looks like this:
 
 First, import the library and exceptions.
 
 ::
 
-    import bitcoinrpc
-    from bitcoinrpc.exceptions import InsufficientFunds
+    import litecoinrpc
+    from litecoinrpc.exceptions import InsufficientFunds
 
-Then, we connect to the currently running ``bitcoin`` instance of the current user on the local machine
+Then, we connect to the currently running ``litecoin`` instance of the current user on the local machine
 with one call to
-:func:`~bitcoinrpc.connect_to_local`. This returns a :class:`~bitcoinrpc.connection.BitcoinConnection` objects:
+:func:`~litecoinrpc.connect_to_local`. This returns a :class:`~litecoinrpc.connection.LitecoinConnection` objects:
 
 ::
 
-    conn = bitcoinrpc.connect_to_local()
+    conn = litecoinrpc.connect_to_local()
 
-Try to move one bitcoin from account ``testaccount`` to account ``testaccount2`` using 
-:func:`~bitcoinrpc.connection.BitcoinConnection.move`. Catch the :class:`~bitcoinrpc.exceptions.InsufficientFunds`
+Try to move one litecoin from account ``testaccount`` to account ``testaccount2`` using 
+:func:`~litecoinrpc.connection.LitecoinConnection.move`. Catch the :class:`~litecoinrpc.exceptions.InsufficientFunds`
 exception in the case the originating account is broke:
 
 ::  
@@ -31,7 +31,7 @@ exception in the case the originating account is broke:
         print "Account does not have enough funds available!"
 
 
-Retrieve general server information with :func:`~bitcoinrpc.connection.BitcoinConnection.getinfo` and print some statistics:
+Retrieve general server information with :func:`~litecoinrpc.connection.LitecoinConnection.getinfo` and print some statistics:
 
 ::
 

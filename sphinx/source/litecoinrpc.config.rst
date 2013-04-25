@@ -1,7 +1,7 @@
-:mod:`bitcoinrpc` --- Convenience functions
+:mod:`litecoinrpc.config` --- Utilities for reading litecoin configuration files
 ====================================================================================
 
-.. automodule:: bitcoinrpc
+.. automodule:: litecoinrpc.config
    :members:
    :show-inheritance:
-      
+   
