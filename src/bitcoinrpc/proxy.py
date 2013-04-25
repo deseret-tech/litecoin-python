@@ -31,6 +31,7 @@ try:
 except ImportError:
     import urlparse
 from collections import defaultdict, deque
+from bitcoinrpc.exceptions import TransportException
 
 USER_AGENT = "AuthServiceProxy/0.1"
 
@@ -75,7 +76,8 @@ class HTTPTransport(object):
             raise JSONRPCException({
                 'code': -342, 'message': 'missing HTTP response from server'})
         elif httpresp.status == httplib.FORBIDDEN:
-            raise Exception("bitcoind returns 403 Forbidden. Is your IP allowed?")
+            msg = "bitcoind returns 403 Forbidden. Is your IP allowed?"
+            raise TransportException(msg, code = 403, protocol = "HTTP", raw_detail = httpresp)
 
         resp = httpresp.read()
         return resp.decode('utf8')
