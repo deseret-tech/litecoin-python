@@ -64,6 +64,23 @@ class BitcoinException(Exception):
         Exception.__init__(self, error['message'])
         self.code = error['code']
 
+class TransportException(Exception):
+    """
+    Class to define transport-level failures.
+    """
+    def __init__(self, msg, code = None, protocol = None, raw_detail = None):
+        self.msg = msg
+        self.code = code
+        self.protocol = protocol
+        self.raw_detail = raw_detail
+        self.s = """
+        Transport-level failure: {msg}
+        Code: {code}
+        Protocol: {protocol}
+        """.format(msg = msg, code = code, protocol = protocol)
+
+    def __str__(self):
+       return self.s
 
 ##### General application defined errors
 class SafeMode(BitcoinException):
