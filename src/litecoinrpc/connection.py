@@ -380,6 +380,21 @@ class LitecoinConnection(object):
             return dict(self.proxy.signrawtransaction(hexstring, previous_transactions, private_keys))
         except JSONRPCException as e:
             raise _wrap_exception(e.error)
+            
+    def sendrawtransaction(self, hexstring):
+        """
+        Sends the provided raw trasnaction.
+        
+        Returns the transaction id of the sent transaction.
+
+        Arguments:
+
+        - *hexstring* -- A hex string of the transaction, as returned by createrawtransaction.
+        """
+        try:
+            return self.proxy.sendrawtransaction(hexstring)
+        except JSONRPCException as e:
+            raise _wrap_exception(e.error)
 
     def decoderawtransaction(self, hexstring):
         """
